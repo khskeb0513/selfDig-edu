@@ -4,8 +4,8 @@ const router = express.Router();
 const uuid = require('uuid').v4
 
 const browser = puppeteer.launch({
-    headless: false,
-    args: ['--ignore-certificate-errors'],
+    headless: true,
+    args: ['--ignore-certificate-errors', '--no-sandbox'],
     slowMo: '250ms'
 });
 let chain = Promise.resolve();
