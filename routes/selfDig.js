@@ -6,7 +6,7 @@ const router = express.Router();
 router.get('/', function (req, res, next) {
     (async () => {
         const browser = await puppeteer.launch({
-            headless: false,
+            headless: true,
             args: ['--ignore-certificate-errors']
         });
         const page = await browser.newPage();
