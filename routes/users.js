@@ -73,4 +73,12 @@ router.get('/:school_code', function (req, res, next) {
     })();
 });
 
+router.get('/getUser/:SCHOOL_CODE', (req, res, next) => {
+    if (req.params['SCHOOL_CODE'].splice(0,3) === 'C10') {
+        res.redirect('/users/' + req.params['SCHOOL_CODE'])
+    } else {
+        res.redirect('/users/C10' + req.params['SCHOOL_CODE'])
+    }
+})
+
 module.exports = router;

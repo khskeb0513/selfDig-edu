@@ -19,10 +19,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const selfDigRouter = require('./routes/selfDig');
-
+const searchRouter = require('./routes/search')
+const passwordRouter = require('./routes/password')
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/self', selfDigRouter);
+app.use('/search', searchRouter);
+app.use('/password', passwordRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
