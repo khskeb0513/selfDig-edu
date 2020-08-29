@@ -10,7 +10,7 @@ router.get('/', function (req, res, next) {
         let secondCount = 0
         const browser = await puppeteer.launch({
             headless: true,
-            args: ['--ignore-certificate-errors']
+            args: ['--ignore-certificate-errors --no-sandbox']
         });
         const page = await browser.newPage();
         await page.goto('https://eduro.pen.go.kr/stv_cvd_co00_002.do', {waitUntil: "networkidle2"});
