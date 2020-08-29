@@ -251,3 +251,4 @@ dist
 *.iml
 out
 gen
+public/images/results/*
