@@ -26,24 +26,20 @@ router.get('/', async function (req, res, next) {
             await page.keyboard.press('Tab')
             await page.type('input#frnoRidno', Birth)
             while (page.url() === 'https://eduro.pen.go.kr/stv_cvd_co00_002.do') {
-                // firstCount++
-                // if (firstCount > 1000) {
-                //     res.send('에러발생, F5 및 위로 끌어당겨 새로고침 바람.')
-                //     throw console.log('too many tries')
-                // }
                 try {
                     await page.click('button#btnConfirm')
-                } catch (e) {
-                    if (page.url() !== 'https://eduro.pen.go.kr/stv_cvd_co00_000.do') {
-                        res.send('에러발생, F5 및 위로 끌어당겨 새로고침 바람.')
-                        throw console.error(e)
-                    }
+                } catch  {
                 }
-                // await page.on('dialog', async dialog => {
-                //     console.log(dialog.message());
-                //     await dialog.dismiss();
-                //     await browser.close();
-                // });
+                await page.on('dialog', async dialog => {
+                    if (dialog) {
+                        if (dialog.message().indexOf('잘못된 본인확인 정보(학교,성명,생년월일)를 입력하였습니다.') !== -1) {
+                            await page.close()
+                            await res.send('입력된 정보가 잘못되었습니다. 다시 시도 바랍니다.')
+                        } else {
+                            await dialog.dismiss();
+                        }
+                    }
+                });
             }
             await page.click('input#rspns011')
             await page.click('input#rspns02')
